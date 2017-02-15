@@ -1,11 +1,16 @@
-import React, { PropTypes } from 'react';
+import React, { PropTypes } from 'react'
 
 const Header = (props) => {
 	return (
-		<header>
-			<h1>Hackaton header</h1>
-		</header>
-	);
-};
+		<div className="panel-heading">
+			<div className="panel-title">
+				<h5>
+					<span className="glyphicon glyphicon-shopping-cart"></span>
+					Shopping Cart
+				</h5>
+			</div>
+		</div>
+	)
+}
 
-export default Header;
+export default Header
