@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import ProductsContainer from './ProductsContainer'
 import ProductsCartContainer from './ProductsCartContainer'
 
-const App = () => (
+const App = (props) => (
     <div className="panel-body">
-        <ProductsContainer/>
+        <ProductsContainer locale={props.locale}/>
         <hr/>
         <ProductsCartContainer/>
     </div>
 )
+
+App.PropTypes = {
+	locale: PropTypes.object
+}
 
 export default App

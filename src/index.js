@@ -15,6 +15,10 @@ import { Provider } from 'react-redux'
 import createLogger from 'redux-logger'
 import thunk from 'redux-thunk'
 
+import { en } from './locales/en';
+import { fr } from './locales/fr';
+
+const locales = {en, fr};
 
 const middleware = [ thunk ];
 if (process.env.NODE_ENV !== 'production') {
@@ -35,8 +39,8 @@ class ShoppingCart extends React.Component {
 				<div className="container">
 					<div className="row">
 						<div className="panel panel-info">
-							<Header/>
-							<App/>
+							<Header locale={locales.fr}/>
+							<App locale={locales.fr}/>
 							<Footer/>
 						</div>
 					</div>
@@ -47,6 +51,6 @@ class ShoppingCart extends React.Component {
 }
 
 render(
-	<ShoppingCart/>,
+	<ShoppingCart locale={locales.fr}/>,
 	document.getElementById('app')
 )

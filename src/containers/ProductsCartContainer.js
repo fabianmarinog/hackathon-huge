@@ -23,7 +23,7 @@ ProductsCartContainer.propTypes = {
 		img : PropTypes.string.isRequired,
 		price: PropTypes.number.isRequired,
 		quantity: PropTypes.number.isRequired,
-		desc: PropTypes.string.isRequired,
+		desc: PropTypes.string.isRequired
 })).isRequired,
 	addToCart : PropTypes.func.isRequired
 }
