@@ -2,8 +2,7 @@ import React, { PropTypes } from 'react'
 
 class CartItem extends React.Component {
 	render(){
-
-		const locale = this.props.locale
+		const { locale } = this.context;
 		const item = this.props.product
 		const { onAddToCartClicked } = this.props
 
@@ -49,7 +48,7 @@ class CartItem extends React.Component {
 	}
 }
 
-CartItem.PropTypes = {
+CartItem.contextTypes = {
 	locale: PropTypes.object
 }
 

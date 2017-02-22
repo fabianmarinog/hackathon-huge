@@ -2,15 +2,16 @@ import React, { PropTypes } from 'react'
 import ProductsContainer from './ProductsContainer'
 import ProductsCartContainer from './ProductsCartContainer'
 
-const App = (props) => (
+const App = (props, context) => (
     <div className="panel-body">
-        <ProductsContainer locale={props.locale}/>
+    {context.locale.productsTitle}
+        <ProductsContainer/>
         <hr/>
         <ProductsCartContainer/>
     </div>
 )
 
-App.PropTypes = {
+App.contextTypes = {
 	locale: PropTypes.object
 }
 

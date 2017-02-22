@@ -4,13 +4,12 @@ import CartItem from '../components/CartItem'
 import { connect } from 'react-redux'
 import { addToCart } from '../actions'
 
-const ProductsContainer = ({ products, addToCart, locale}) => (
-      <ProductsList title="Products">
+const ProductsContainer = ({ products, addToCart}, context) => (
+      <ProductsList title={context.locale.productsTitle}>
         {products.map(product =>
         <CartItem
             key = {product.id}
             product = {product}
-            locale = {locale}
             onAddToCartClicked = {() => addToCart(product)}
         />
         )}
@@ -18,7 +17,6 @@ const ProductsContainer = ({ products, addToCart, locale}) => (
 )
 
 ProductsContainer.propTypes = {
-	locale: PropTypes.object,
   products: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
@@ -30,10 +28,15 @@ ProductsContainer.propTypes = {
   addToCart : PropTypes.func.isRequired
 }
 
+ProductsContainer.contextTypes = {
+	locale: PropTypes.object
+}
+
 const mapStateToProps = (state) => {
     return {
 		products: state.products
 	}
 }
+
 
 export default connect(mapStateToProps, {addToCart})(ProductsContainer)

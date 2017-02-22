@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Component, PropTypes } from 'react';
+
 import { render } from 'react-dom'
 import styles from './styles/main.scss'
 
@@ -33,14 +34,36 @@ const defaultState = {
 const store = createStore(rootReducer, defaultState, applyMiddleware(...middleware))
 
 class ShoppingCart extends React.Component {
+
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentLocale: 'fr'
+		};
+	}
+
+	getChildContext() {
+		return {locale: locales[this.state.currentLocale]}
+	}
+
+	changeLocale(locale) {
+		this.setState({currentLocale: locale})
+	}
+
 	render() {
+
 		return (
 			<Provider store={store}>
 				<div className="container">
 					<div className="row">
 						<div className="panel panel-info">
-							<Header locale={locales.fr}/>
-							<App locale={locales.fr}/>
+						<nav>
+							<a onClick={() => this.changeLocale('en')}>🇺🇸</a>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<a onClick={() => this.changeLocale('fr')}>🇫🇷</a>
+						</nav>
+						<Header/>
+							<App/>
 							<Footer/>
 						</div>
 					</div>
@@ -48,6 +71,10 @@ class ShoppingCart extends React.Component {
 			</Provider>
 		)
 	}
+}
+
+ShoppingCart.childContextTypes = {
+    locale: PropTypes.object
 }
 
 render(
