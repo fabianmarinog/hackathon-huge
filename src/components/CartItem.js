@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 
 class CartItem extends React.Component {
+
 	render(){
 		const { locale } = this.context;
 		const item = this.props.product
@@ -19,7 +20,9 @@ class CartItem extends React.Component {
 					</div>
 					<div className="col-sm-6">
 						<h4 className="product-name">
-							<strong>{item.name}</strong>
+
+								<strong>{item.name}</strong>
+
 						</h4>
 						<h4>
 							<small>{item.desc}</small>
