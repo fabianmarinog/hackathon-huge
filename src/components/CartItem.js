@@ -1,15 +1,18 @@
 import React, { PropTypes } from 'react'
 
 class CartItem extends React.Component {
+	componentDidMount() {
+		this.context.theme.subscribe(() => this.forceUpdate())
+  	}
 
 	render(){
-		const { locale } = this.context;
+		const { theme } = this.context;
 		const item = this.props.product
 		const { onAddToCartClicked } = this.props
 
 		let addButton;
-		if (locale){
-			addButton = <button type="button" className="btn btn-success btn-block" onClick={onAddToCartClicked}>{locale.addCart}</button>
+		if (theme){
+			addButton = <button type="button" className="btn btn-success btn-block" onClick={onAddToCartClicked}>{theme.language.addCart}</button>
 		}
 
 		return (
@@ -52,7 +55,7 @@ class CartItem extends React.Component {
 }
 
 CartItem.contextTypes = {
-	locale: PropTypes.object
+	theme: React.PropTypes.object
 }
 
 export default CartItem

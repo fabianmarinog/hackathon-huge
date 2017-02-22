@@ -16,6 +16,8 @@ import { Provider } from 'react-redux'
 import createLogger from 'redux-logger'
 import thunk from 'redux-thunk'
 
+import ThemeProvider from './containers/ThemeProvider'
+
 import { en } from './locales/en';
 import { fr } from './locales/fr';
 
@@ -38,37 +40,27 @@ class ShoppingCart extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			currentLocale: 'fr',
-			color: 'blue'
+			currentLanguage: fr
 		};
 	}
 
-	getChildContext() {
-		return {locale: locales[this.state.currentLocale]}
+	changeLanguage(locale) {
+		this.setState({ currentLanguage: locale})
 	}
-
-	changeLocale(locale) {
-		this.setState({currentLocale: locale})
-	}
-
-	makeRed() {
-    	this.setState({ color: 'red' })
-    }
 
 	render() {
 
 		return (
-			<ThemeProvider color={this.state.color}>
+			<ThemeProvider language={this.state.currentLanguage}>
 				<Provider store={store}>
 					<div className="container">
 						<div className="row">
 							<div className="panel panel-info">
 							<nav>
-								<a onClick={() => this.changeLocale('en')}>🇺🇸</a>
+								<a onClick={() => this.changeLanguage(en)}>🇺🇸</a>
 								&nbsp;&nbsp;&nbsp;&nbsp;
-								<a onClick={() => this.changeLocale('fr')}>🇫🇷</a>
+								<a onClick={() => this.changeLanguage(fr)}>🇫🇷</a>
 							</nav>
-							<button onClick={this.makeRed.bind(this)}>Red please!</button>
 							<Header/>
 								<App/>
 								<Footer/>
@@ -79,50 +71,6 @@ class ShoppingCart extends React.Component {
 			</ThemeProvider>
 		)
 	}
-}
-
-ShoppingCart.childContextTypes = {
-    locale: PropTypes.object
-}
-
-class Theme {
-  constructor(color) {
-    this.color = color
-    this.subscriptions = []
-  }
-
-  setColor(color) {
-    this.color = color
-    this.subscriptions.forEach(f => f())
-  }
-
-  subscribe(f) {
-    this.subscriptions.push(f)
-  }
-}
-
-class ThemeProvider extends React.Component {
-  constructor(s, c) {
-    super(s, c)
-    this.theme = new Theme(this.props.color)
-  }
-
-  componentWillReceiveProps(next) {
-  	console.log(next.color);
-    this.theme.setColor(next.color)
-  }
-
-  getChildContext() {
-    return {theme: this.theme}
-  }
-
-  render() {
-    return <div>{this.props.children}</div>
-  }
-}
-
-ThemeProvider.childContextTypes = {
-  theme: PropTypes.object
 }
 
 render(

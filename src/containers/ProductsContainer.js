@@ -4,30 +4,15 @@ import CartItem from '../components/CartItem'
 import { connect } from 'react-redux'
 import { addToCart } from '../actions'
 
-class ThemedText extends React.Component {
-  componentDidMount() {
-    this.context.theme.subscribe(() => this.forceUpdate())
-  }
-  render() {
-    return <div style={{color: this.context.theme.color}}>
-      {this.props.children}
-    </div>
-  }
-}
-ThemedText.contextTypes = {
-  theme: React.PropTypes.object
-}
-
 
 const ProductsContainer = ({ products, addToCart}, context) => (
-      <ProductsList title={context.locale.productsTitle}>
+      <ProductsList>
         {products.map(product =>
-        <ThemedText key = {product.id}>
         	<CartItem
+        			key = {product.id}
             	product = {product}
             	onAddToCartClicked = {() => addToCart(product)}
         	/>
-        </ThemedText>
         )}
       </ProductsList>
 )
@@ -42,10 +27,6 @@ ProductsContainer.propTypes = {
     desc: PropTypes.string.isRequired,
 })).isRequired,
   addToCart : PropTypes.func.isRequired
-}
-
-ProductsContainer.contextTypes = {
-	locale: PropTypes.object
 }
 
 const mapStateToProps = (state) => {

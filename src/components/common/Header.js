@@ -2,14 +2,14 @@ import React, { PropTypes } from 'react'
 
 const Header = (props, context) => {
 
-	const { locale } = context
+	const { theme } = context
 
 	return (
 		<div className="panel-heading">
 			<div className="panel-title">
 				<h5>
 					<span className="glyphicon glyphicon-shopping-cart"></span>
-					{locale.header}
+					{theme.language.header}
 				</h5>
 			</div>
 		</div>
@@ -17,7 +17,7 @@ const Header = (props, context) => {
 }
 
 Header.contextTypes = {
-	locale: PropTypes.object
+	theme: PropTypes.object
 }
 
 export default Header
