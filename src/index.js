@@ -61,7 +61,7 @@ class ShoppingCart extends React.Component {
 								&nbsp;&nbsp;&nbsp;&nbsp;
 								<a onClick={() => this.changeLanguage(fr)}>🇫🇷</a>
 							</nav>
-							<Header/>
+              <Header/>
 								<App/>
 								<Footer/>
 							</div>

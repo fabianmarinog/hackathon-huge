@@ -3,5 +3,6 @@ export const fr = {
   "totalText": "Le total",
   "checkoutButton": "caisse",
   "productsTitle": "Les produits",
-  "addCart": "ajouter au chariot"
+  "addCart": "ajouter au chariot",
+  "headerButton": "Animer"
 }
