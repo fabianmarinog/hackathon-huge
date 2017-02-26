@@ -7,7 +7,7 @@ class ProductsList extends React.Component {
 
   	render() {
 
-  		const { theme } = this.context;
+  	const { theme } = this.context;
 		const children = this.props.children
 
   		return (

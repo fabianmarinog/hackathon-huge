@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import ProductsContainer from './ProductsContainer'
 import ProductsCartContainer from './ProductsCartContainer'
 
-const App = (props, context) => (
+const App = (props) => (
     <div className="panel-body">
         <ProductsContainer/>
         <hr/>
