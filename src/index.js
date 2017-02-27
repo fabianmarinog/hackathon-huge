@@ -1,3 +1,6 @@
+import Droppable from './testing/modules/Droppable'
+import CopyClipboard from './testing/modules/CopyClipboard'
+
 import './testing/modules/mocha-setup'
 import React from 'react'
 import { render } from 'react-dom'
@@ -48,6 +51,39 @@ describe('Header', () => {
   })
 })
 
+describe('Droppable', () => {
+ let div
+ beforeEach(() => {
+   div = document.createElement('div')
+   document.body.appendChild(div)
+ })
+
+ afterEach(() => document.body.removeChild(div))
+
+ it('accepts files', () => {
+   render(<Droppable/>, div)
+   Simulate.dragOver(div.querySelector('div.Droppable'), {
+     dataTransfer: { types: ['Files'] }
+   })
+   expect(div.innerHTML).toMatch(/Drop it!/, '"Drop it!" was not found in HTML')
+ })
+})
+
+describe('CopyClipboard', () => {
+ let div
+ beforeEach(() => {
+   div = document.createElement('div')
+   document.body.appendChild(div)
+ })
+
+ afterEach(() => document.body.removeChild(div))
+
+ it('copy url', () => {
+   render(<CopyClipboard/>, div)
+   Simulate.click(div.querySelector('button'))
+   expect(div.innerHTML).toMatch(new RegExp(location.href), '"current url" was not found in HTML')
+ })
+})
 
 // import React, { Component, PropTypes } from 'react';
 //
@@ -115,6 +151,8 @@ describe('Header', () => {
 //               <Header/>
 // 								<App/>
 // 								<Footer/>
+//                 <Droppable/>
+//                 <CopyClipboard/>
 // 							</div>
 // 						</div>
 // 					</div>
