@@ -21,7 +21,8 @@
     "redux": "^3.6.0",
     "redux-logger": "^2.8.1",
     "redux-thunk": "^2.2.0",
-    "toastr": "2.1.2"
+    "toastr": "2.1.2",
+    "imports-loader": "0.6.5"
   },
   "devDependencies": {
     "babel-cli": "6.8.0",

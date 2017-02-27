@@ -42,14 +42,14 @@ const TweenToggleHeader = React.createClass({
     }
 
 		const { theme } = this.context
-
+		const header = (theme && theme.language) ? theme.language.header : this.props.header;
     return (
 			<div className="panel-info">
 				<div className="panel-heading">
 					<div className="panel-title">
 						<h5 className="animated-title" style={knobStyle}>
 							<span className="glyphicon glyphicon-shopping-cart"></span>
-							{theme.language.header}
+							{header}
 						</h5>
 					</div>
 				</div>
@@ -72,6 +72,7 @@ const SpringToggleHeader = React.createClass({
   render() {
     const x = this.props.isActive ? 400 : 0
 		const { theme } = this.context
+		const header = (theme && theme.language) ? theme.language.header : this.props.header;
 
     return (
 			<div className="panel-info">
@@ -83,7 +84,7 @@ const SpringToggleHeader = React.createClass({
 	            	WebkitTransform: `translate3d(${s.x}px,0,0)`,
 	            	transform: `translate3d(${s.x}px,0,0)` }}>
 								<span className="glyphicon glyphicon-shopping-cart"></span>
-								{theme.language.header}
+								{header}
 								</h5>
 							)}
 							</Motion>
@@ -104,7 +105,7 @@ class Header extends React.Component {
 	}
 
 	componentDidMount() {
-		this.context.theme.subscribe(() => this.forceUpdate())
+		this.context.theme && this.context.theme.subscribe(() => this.forceUpdate())
 	}
 
   toggle() {
@@ -113,12 +114,14 @@ class Header extends React.Component {
 
   render() {
 		const { theme } = this.context
-
+		const header = (theme && theme.language) ? theme.language.header : this.props.header;
+		const headerButton = (theme && theme.language) ? theme.language.headerButton : this.props.headerButton;
 		return (
 			<div>
-				<TweenToggleHeader isActive={this.state.isActive}/>
-				<SpringToggleHeader isActive={this.state.isActive}/>
-				<button onClick={() => this.toggle()}>{theme.language.headerButton}</button>
+				<TweenToggleHeader header={header} isActive={this.state.isActive}/>
+				<SpringToggleHeader header={header} isActive={this.state.isActive}/>
+				<button onClick={() => this.toggle()}>{headerButton}</button>
+				{this.props.isOpen && this.props.children}
 			</div>
 		)
   }
